@@ -1,0 +1,16 @@
+wwwroot\app.css
+wwwroot\bootstrap\bootstrap.min.css
+wwwroot\bootstrap\bootstrap.min.css.map
+wwwroot\‏‏employees - עותק.csv
+wwwroot\employees.csv
+wwwroot\favicon.png
+wwwroot\icons\CEO.png
+wwwroot\icons\ceo2.png
+wwwroot\icons\Junior.png
+wwwroot\icons\Senior.png
+wwwroot\images\Bruce_Wayne.jpg
+wwwroot\images\Buffy_Summers.png
+wwwroot\images\Chuck_Bartowski.jpg
+wwwroot\images\Clark_Kent.jpg
+wwwroot\images\Piper_Halliwell.jpg
+wwwroot\images\Rachel_Green.jpg

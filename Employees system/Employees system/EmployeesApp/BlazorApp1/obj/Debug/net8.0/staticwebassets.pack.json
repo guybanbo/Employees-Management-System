@@ -1,0 +1,93 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\BlazorApp1.bundle.scp.css",
+      "PackagePath": "staticwebassets\\BlazorApp1.72xb8i838x.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\wwwroot\\employees.csv",
+      "PackagePath": "staticwebassets\\employees.csv"
+    },
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\wwwroot\\icons\\CEO.png",
+      "PackagePath": "staticwebassets\\icons\\CEO.png"
+    },
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\wwwroot\\icons\\Junior.png",
+      "PackagePath": "staticwebassets\\icons\\Junior.png"
+    },
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\wwwroot\\icons\\Senior.png",
+      "PackagePath": "staticwebassets\\icons\\Senior.png"
+    },
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\wwwroot\\icons\\ceo2.png",
+      "PackagePath": "staticwebassets\\icons\\ceo2.png"
+    },
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\wwwroot\\images\\Bruce_Wayne.jpg",
+      "PackagePath": "staticwebassets\\images\\Bruce_Wayne.jpg"
+    },
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\wwwroot\\images\\Buffy_Summers.png",
+      "PackagePath": "staticwebassets\\images\\Buffy_Summers.png"
+    },
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\wwwroot\\images\\Chuck_Bartowski.jpg",
+      "PackagePath": "staticwebassets\\images\\Chuck_Bartowski.jpg"
+    },
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\wwwroot\\images\\Clark_Kent.jpg",
+      "PackagePath": "staticwebassets\\images\\Clark_Kent.jpg"
+    },
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\wwwroot\\images\\Piper_Halliwell.jpg",
+      "PackagePath": "staticwebassets\\images\\Piper_Halliwell.jpg"
+    },
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\wwwroot\\images\\Rachel_Green.jpg",
+      "PackagePath": "staticwebassets\\images\\Rachel_Green.jpg"
+    },
+    {
+      "Id": "C:\\Users\\USER\\Desktop\\Employees system\\Employees system\\EmployeesApp\\BlazorApp1\\wwwroot\\‏‏employees - עותק.csv",
+      "PackagePath": "staticwebassets\\‏‏employees - עותק.csv"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.BlazorApp1.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.BlazorApp1.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.BlazorApp1.props",
+      "PackagePath": "build\\BlazorApp1.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.BlazorApp1.props",
+      "PackagePath": "buildMultiTargeting\\BlazorApp1.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.BlazorApp1.props",
+      "PackagePath": "buildTransitive\\BlazorApp1.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

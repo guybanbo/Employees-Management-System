@@ -1,0 +1,66 @@
+﻿@inherits Employees
+@using BlazorApp1.Models
+@attribute [StreamRendering]
+@inject BlazorApp1.Services.FileService FileService
+<div class="card m-3  d-flex flex-wrap" style="width:30%; max-height:10.5%;">
+    <div class="card-header">
+        <h3>@employee.Name</h3>
+    </div>
+    <img class="card-img-top imageThumbnail" style="height: 300px" src="@($"{employee.ProfileImage}?t={DateTime.Now.Ticks}")"
+         @key="@employee.ProfileImage" />
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">ID: @employee.ID</li>
+        <li class="list-group-item">@employee.Title <img src="@($"icons/{employee.Title}.png")" width="30" height="30" /></li>
+        <li class="list-group-item">Salary:@employee.Salary ₪</li>
+    </ul>
+    <div class="card-footer text-center">
+
+        <a href="/EditEmployee/@employee.ID" class="btn btn-primary m-1">Edit</a>
+
+        <button class="btn btn-danger m-1" @onclick="@onDelete">Delete</button>
+        @if (Show)
+        {
+            <div class="modal" tabindex="-1" role="dialog" style="display: @(Show ? "block" : "none")">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirm Dialog</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete the employee? </p>
+                            <p>employee ID: @employee.ID</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" @onclick="@DeleteEmployee">Ok</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="@(()=> this.Show=false)">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+@code {
+    [Parameter]
+    public Employee? employee{ get; set; }
+    public bool Show { get; set; } = false;
+    [Parameter]
+    public EventCallback<string> OnEmployeeDeleted { get; set; } // Notify parent
+
+    private void onDelete()
+    {
+        this.Show = true;
+    }
+
+    private async Task DeleteEmployee()
+    {
+        if (employee != null)
+        {
+            await OnEmployeeDeleted.InvokeAsync(employee.ID); // Notify parent
+        }
+        this.Show = false;
+    }
+}

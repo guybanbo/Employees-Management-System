@@ -1,0 +1,107 @@
+﻿@page "/employees"
+@rendermode InteractiveServer
+@attribute [StreamRendering]
+@using BlazorApp1.Models
+@inject BlazorApp1.Services.FileService FileService
+<PageTitle>Employees</PageTitle>
+
+
+<h3>Employee List</h3>
+@if (employees == null)
+{
+    <p><em>Loading...</em></p>
+}
+else{
+    <p>
+        <a href="/createEmployee" class="btn btn-primary m-1">Add Employee</a>
+    </p>
+    <p>
+        <label>Search: </label>
+        <input type="search" @bind="filterValue" placeholder="Enter search term..." />
+
+        <label>Filter by: </label>
+        <select @bind="filterCriteria">
+            <option value="Name">Name</option>
+            <option value="Title">Title</option>
+            <option value="Salary">Salary</option>
+        </select>
+
+        <label>Sort by: </label>
+        <select @bind="sortCriteria">
+            <option value="Default">Default</option>
+            <option value="Name">Name</option>
+            <option value="Title">Title</option>
+            <option value="Salary">Salary</option>
+        </select>
+
+        <label>Order By: </label>
+        <select @bind="sortOrder">
+            <option value="Ascending">Ascending</option>
+            <option value="Descending">Descending</option>
+        </select>
+
+        <button @onclick="ApplyFilterAndSort">Apply filter and sort</button>
+    </p>
+    <div class="card-deck d-flex flex-wrap">
+        @foreach (var employee in employeesView)
+        {
+            <EmployeeCard employee="employee" OnEmployeeDeleted="HandleEmployeeDeleted"></EmployeeCard>
+        }
+    </div>
+}
+
+@code {
+
+    public List<Employee>? employees;
+    public List<Employee>? employeesView;
+    private string filterValue = string.Empty;
+    private string filterCriteria = "Name"; // Default filter criteria
+    private string sortCriteria = "Default"; // Default sorting
+    private string sortOrder = "Ascending"; // Default order
+
+    private void ApplyFilterAndSort()
+    {
+        // Apply filtering
+        var filtered = employees?.Where(e =>
+            filterCriteria switch
+            {
+                "Name" => e.Name.Contains(filterValue, StringComparison.OrdinalIgnoreCase),
+                "Title" => e.Title.Contains(filterValue, StringComparison.OrdinalIgnoreCase),
+                "Salary" => e.Salary.ToString().Contains(filterValue),
+                _ => true
+            }).ToList() ?? new List<Employee>();
+
+        // Apply sorting
+        employeesView = sortCriteria switch
+        {
+            "Name" => sortOrder == "Ascending" ? filtered.OrderBy(e => e.Name).ToList() : filtered.OrderByDescending(e => e.Name).ToList(),
+            "Title" => sortOrder == "Ascending" ? filtered.OrderBy(e => e.Title).ToList() : filtered.OrderByDescending(e => e.Title).ToList(),
+            "Salary" => sortOrder == "Ascending" ? filtered.OrderBy(e => e.Salary).ToList() : filtered.OrderByDescending(e => e.Salary).ToList(),
+            _ => filtered // Default: no sorting
+        };
+
+        StateHasChanged();
+    }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Load wmployees data from CSV stored in wwwroot
+        employees = await FileService.LoadEmployees("wwwroot/employees.csv");
+        employeesView = employees.Where(e => e.Name.ToLower().Contains(filterValue.ToLower())).ToList();
+    }
+
+    private async Task HandleEmployeeDeleted(string employeeId)
+    {
+        var toRemove = employees?.Find(e => e.ID == employeeId);
+        if (toRemove != null)
+        {
+            employees.Remove(toRemove);
+            await FileService.SaveToCsvAsync(employees, "employees.csv");
+            ApplyFilterAndSort();
+            StateHasChanged(); // Refresh the component so the deleted employee card will disapper
+        }
+    }
+
+}

@@ -1,0 +1,108 @@
+﻿@page "/createEmployee"
+@attribute [StreamRendering]
+@using BlazorApp1.Models
+@inherits Employees
+@inject NavigationManager NavigationManager
+@inject BlazorApp1.Services.FileService FileService
+@inject IConfiguration config
+
+<PageTitle> Create Employee</PageTitle>
+<h1>Create Employee</h1>
+<h2>Employee</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="Employee" OnValidSubmit="AddEmployee" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" />
+            @if (!string.IsNullOrEmpty(IdErrorMessage))
+            {
+                <div class="text-danger">@IdErrorMessage</div>
+            }
+            <div class="mb-3">
+                <label for="title" class="form-label">ID:</label>
+                <InputText id="ID" @bind-Value="Employee.ID" @oninput="()=>IdErrorMessage=String.Empty" class="form-control" />
+                <ValidationMessage For="() => Employee.ID" class="text-danger" />
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <InputText id="Name" @bind-Value="Employee.Name" class="form-control" />
+                <ValidationMessage For="() => Employee.Name" class="text-danger" />
+            </div>
+            <div class="mb-3">
+                <label for="title" class="form-label">Title:</label>
+                <InputSelect id="Title" @bind-Value="Employee.Title" class="form-control">
+                     <option value="" disabled selected>-- Select a Title --</option>
+                     <option value="Junior">Junior</option>
+                     <option value="Senior">Senior</option>
+                     <option value="CEO">CEO</option>
+                </InputSelect>
+              <ValidationMessage For="() => Employee.Title" class="text-danger" />
+            </div>
+            <div class="mb-3">
+                <label for="Salary" class="form-label">Salary:</label>
+                <InputNumber id="salary" @bind-Value="Employee.Salary" class="form-control" />
+                <ValidationMessage For="() => Employee.Salary" class="text-danger" />
+            </div>
+            <div class="mb-3">
+                <label for="profileImage" class="form-label">Profile Image:</label>
+                <InputFile OnChange="FileUploaded" accept=".png,.jpg,.jpeg" />
+                <ValidationMessage For="() => Employee.ProfileImage" class="text-danger" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/employees">Back to List</a>
+</div>
+
+
+@code {
+    [SupplyParameterFromForm]
+    private Employee Employee { get; set; } = new();
+    public IBrowserFile? browserFile { get; set; }
+    private string IdErrorMessage { get; set; } = string.Empty;
+
+
+    private async Task AddEmployee()
+    {
+        if (employees.Any(e => e.ID == Employee.ID))
+        {
+            IdErrorMessage = "This ID already exists!";
+            return;
+        }
+
+        // Ensure that the ProfileImage path is updated with the correct ID
+        if (browserFile != null)
+        {
+            var extension = Path.GetExtension(browserFile.Name);
+            Employee.ProfileImage = $"images/{Employee.ID}{extension}";
+        }
+
+        // If ID is unique, proceed with adding the employee
+        IdErrorMessage = string.Empty;
+        await FileService.FileUpload(Employee.ID, browserFile);
+        employees.Add(Employee);
+        Console.WriteLine(employees.Count);
+        if (employees != null)
+        {
+            await FileService.SaveToCsvAsync(employees, "employees.csv");//saving new list to file
+        }
+        NavigationManager.NavigateTo("/employees");
+    }
+
+
+//saving the file and upload path of the image
+    private void FileUploaded(InputFileChangeEventArgs e)
+    {
+        browserFile = e.File;
+        var newFile = Employee.ID;
+        var extension = Path.GetExtension(browserFile.Name);
+        var targetFilePath = Path.ChangeExtension(newFile, extension);
+        Employee.ProfileImage = "images/" + targetFilePath;
+    }
+
+}
